@@ -6,11 +6,12 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import ISEOProps from "./ISEOProps"
 
-function SEO({ description, lang, meta, title }) {
+export default function SEO(props: ISEOProps) {
+  const { description, lang, meta, title } = props
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -25,12 +26,13 @@ function SEO({ description, lang, meta, title }) {
     `
   )
 
+  const seoLang = lang || "en";
   const metaDescription = description || site.siteMetadata.description
 
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        seoLang,
       }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
@@ -67,22 +69,11 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
-      ].concat(meta)}
+        {
+          name:"viewport",
+          content:"width=device-width, initial-scale=1, shrink-to-fit=no"
+        }
+      ].concat(meta || [])}
     />
   )
 }
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-}
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
-}
-
-export default SEO
