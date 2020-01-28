@@ -9,16 +9,16 @@ export default function Header(props: IHeaderProps): JSX.Element {
       <div className={"inner"}>
         <h3 className="masthead-brand">{siteTitle}</h3>
         <nav className="nav nav-masthead justify-content-center">
-          <Link className="nav-link active" to="#">
+          <Link className="nav-link active" to="/">
             Home
           </Link>
-          <Link className="nav-link" to="#">
-            Product
+          <Link className="nav-link" to="/products">
+            Products
           </Link>
-          <Link className="nav-link" to="#">
+          <Link className="nav-link" to="/about">
             About
           </Link>
-          <Link className="nav-link" to="#">
+          <Link className="nav-link" to="/contact">
             Contact
           </Link>
         </nav>
